@@ -1,0 +1,30 @@
+<h1 style="text-align: center">Chats</h1>
+<% @all_chats.each do |chat| %>
+    <div style="margin-left:41%;">
+        <div class="chat">
+            <%= link_to chat.user_first_name + chat.user_last_name , "/chats/" + chat.id.to_s %>
+        </div>
+    </div>
+    <br>
+<% end %>
+
+<hr style="text-align:left;margin-bottom:5%; margin-top:5%">
+
+<% @messages.each do |message| %>
+    <% if message.direction == "outgoing" %>
+        <div class="outgoing">
+            <%= message.text %>
+        </div>
+    <% else %>
+        <div class="incoming">
+            <%= message.text %>
+        </div>
+    <% end %>
+    <br>
+<% end %>
+
+<%= form_with do |form| %>
+  <%= form.label :text, "Message Text:" %>
+  <%= form.text_field :text %>
+  <%= form.submit "Send" %>
+<% end %>
